@@ -10,7 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 import { DarkModeService } from '../services/dark-mode.service';
@@ -22,6 +22,7 @@ import { DarkModeService } from '../services/dark-mode.service';
   standalone: true,
   imports: [
     RouterOutlet,
+    RouterLink,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

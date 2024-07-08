@@ -91,3 +91,10 @@
   background-color: black;
   color: aliceblue;
 }
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  margin-right: 0;
+}
