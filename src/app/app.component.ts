@@ -1,7 +1,7 @@
-import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, Inject, OnDestroy, OnInit } from '@angular/core';
 import { NavigationComponent } from "./navigation/navigation.component";
 import { DarkModeService } from "./services/dark-mode.service";
-
+import { DOCUMENT } from '@angular/common';
 
 import { FullscreenOverlayContainer, OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 @Component({
@@ -17,23 +17,25 @@ export class AppComponent implements OnInit, OnDestroy {
   light_class = 'light-theme';
   dark_class = 'dark-theme';
   @HostBinding('class') className = 'light-theme';
-  constructor(private darkModeService: DarkModeService, private overlay: OverlayContainer) { }
+  constructor(@Inject(DOCUMENT) private document: Document,private darkModeService: DarkModeService, private overlay: OverlayContainer) { }
   ngOnInit(): void {
     this.darkModeService.miEventoSubject.subscribe((changeTo) => {
       this.className = changeTo ? this.dark_class : this.light_class;
-      if (changeTo===true) {
-           this.overlay.getContainerElement().classList.add(this.dark_class);
-           document.body.style.backgroundColor = "#1d1b1e";
+      if (changeTo === true) {
+        this.overlay.getContainerElement().classList.add(this.dark_class);
+        this.document.body.style.backgroundColor = "#1d1b1e";
 
       }
       else {
         this.overlay.getContainerElement().classList.add(this.light_class);
         this.overlay.getContainerElement().classList.remove(this.dark_class);
-        document.body.style.backgroundColor = "#fffbff";
-
+        this.document.body.style.backgroundColor = "#fffbff";
       }
-      console.log('cambiando el color');
     })
+    if (typeof (this.document as any).defaultView.matchMedia !== 'undefined' &&
+      (this.document as any).defaultView.matchMedia('(prefers-color-scheme: dark)').matches) {
+      this.darkModeService.ChangeColor(true);
+    }
   }
   ngOnDestroy(): void {
     this.darkModeService.miEventoSubject.unsubscribe();

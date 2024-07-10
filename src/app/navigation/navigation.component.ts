@@ -52,9 +52,9 @@ export class NavigationComponent implements OnInit {
     this.slide_toggle.valueChanges.subscribe((currentMode) => {
       this.darkModeService.ChangeColor(currentMode!);
     })
+    this.slide_toggle.setValue(this.darkModeService.getCurrentColor());
   }
   ngOnDestroy(): void {
     this.darkModeService.miEventoSubject.unsubscribe();
-    
   }
 }
