@@ -1,53 +1,83 @@
-.container 
-{
+.container {
   display: grid // Use flexbox for easy centering
 }
-.child
-{
+
+.child {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  border-radius: 50%;
+  margin-right: 25px;
+  width: 40px;
+}
+
+@media (max-width: 430px) {
+  h1.mat-h1 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  h1.mat-h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  h1.mat-h1 {
+    font-size: 1.8rem;
+  }
+}
+
+h2 {
+  margin: 0%;
+  text-shadow: 2px 2px #8a8888;
+}
+
+p {
+  margin: 0%;
+}
+
+.column {
+  margin: auto;
   display: flex;
   flex-direction: column
 }
-.logo 
-{
-    border-radius: 50%;
-    margin-right: 25px;
-    width: 40px
-}
-.column
-{
-    margin: auto;
-    display: flex;
-    flex-direction: row
+
+.card {
+  width: fit-content;
+  align-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  box-shadow: 4px 4px 6px rgb(204, 204, 204);
+  border-radius: 10px;
+  background-color: gray;
 }
 
-.card{
-    width: 300px;
-    align-content: space-around;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    box-shadow: 4px 4px 6px rgb(100 100 100);
+.card:hover {
+  scale: 1.2;
 }
 
 .flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-.rowContacts{
-    display: flex;
-    flex-direction: row;
-    align-content: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.rowPhone {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    line-height: 1px;
-    border: aliceblue;
-    border-style: solid;
+.rowContacts {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+}
+
+.columnPhone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .example-action-buttons {
@@ -59,14 +89,14 @@
   align-items: center;
 }
 
-.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+.example-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
   margin-left: 8px;
   background-color: black;
   color: aliceblue;
 }
 
 .rowTitulo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

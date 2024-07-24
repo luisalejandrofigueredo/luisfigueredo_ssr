@@ -5,8 +5,9 @@ import { DegreesComponent } from "./degrees/degrees.component";
 import { ExperienceComponent } from "./experience/experience.component";
 import { AboutComponent } from './about/about.component';
 import { NgGdComponent } from './ng-gd/ng-gd.component';
+import { TableSkillsComponent } from "./table-skills/table-skills.component";
 export const routes: Routes = [{ component: HomepageComponent, path: '' },
-{ component: SkillsComponent, path: 'skills' },
+{ component: TableSkillsComponent, path: 'skills' },
 { component: DegreesComponent, path: 'degrees' },
 { component: ExperienceComponent, path: 'experience' },
 { component: NgGdComponent, path: 'ng-gd' },
