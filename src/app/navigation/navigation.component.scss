@@ -1,19 +1,32 @@
+body{
+  background-color: #8a98eb; /* Example using a blue color */
+}
+mat-toolbar {
+  background-color: #8a98eb; /* Example using a blue color */
+}
+
 .sidenav-container {
   height: 100%;
+  background-color: #8a98eb;
 }
+mat-nav-list{
+  background-color: #8a98eb;
 
+}
 .sidenav {
   width: 200px;
+  background-color: #8a98eb;;
 }
 
-.sidenav.mat-toolbar {
-  background: inherit;
+sidenav.mat-toolbar {
+  background: #8a98eb;
 }
 
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color: #8a98eb;
 }
 
 

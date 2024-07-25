@@ -3,7 +3,6 @@ import { PlatformModule } from '@angular/cdk/platform';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
 @Component({
   selector: 'app-homepage',
   standalone: true,

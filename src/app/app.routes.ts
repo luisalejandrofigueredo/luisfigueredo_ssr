@@ -6,10 +6,12 @@ import { ExperienceComponent } from "./experience/experience.component";
 import { AboutComponent } from './about/about.component';
 import { NgGdComponent } from './ng-gd/ng-gd.component';
 import { TableSkillsComponent } from "./table-skills/table-skills.component";
-export const routes: Routes = [{ component: HomepageComponent, path: '' },
-{ component: TableSkillsComponent, path: 'skills' },
-{ component: DegreesComponent, path: 'degrees' },
-{ component: ExperienceComponent, path: 'experience' },
-{ component: NgGdComponent, path: 'ng-gd' },
-{ component: AboutComponent, path: 'about' }
+export const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { component: HomepageComponent, path: 'home', data: { state: 'home' } },
+    { component: TableSkillsComponent, path: 'skills', data: { state: 'skills' } },
+    { component: DegreesComponent, path: 'degrees', data: { state: 'degrees' } },
+    { component: ExperienceComponent, path: 'experience', data: { state: 'experience' } },
+    { component: NgGdComponent, path: 'ng-gd', data: { state: 'ng-gd' } },
+    { component: AboutComponent, path: 'about', data: { state: 'about' } }
 ];
