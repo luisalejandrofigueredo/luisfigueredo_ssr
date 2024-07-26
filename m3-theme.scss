@@ -3,14 +3,14 @@
 
 @use 'sass:map';
 @use '@angular/material' as mat;
-$global-background-color: #f5f5f5; // Example light gray color
+
 
 mat.$theme-ignore-duplication-warnings: true;
 // Note: Color palettes are generated from primary: #ffffff
 $theme-light: mat.define-theme((color: (theme-type: light,
         primary: mat.$violet-palette,
         ),
-        typography: (brand-family: 'Comic Sans',
+        typography: (brand-family: 'Roboto',
         bold-weight: 900),
         density: (scale: -1),
         ));
@@ -19,7 +19,7 @@ $theme-light: mat.define-theme((color: (theme-type: light,
 $theme-dark: mat.define-theme((color: (theme-type: dark,
         primary: mat.$violet-palette,
       ),
-      typography: (brand-family: 'Comic Sans',
+      typography: (brand-family: 'Roboto',
         bold-weight: 900),
       density: (scale: -1), ),
   );
@@ -27,7 +27,6 @@ $theme-dark: mat.define-theme((color: (theme-type: dark,
 .light-theme {
   @include mat.core-theme($theme-light);
   @include mat.all-component-colors($theme-light);
-
 }
 
 
@@ -36,12 +35,3 @@ $theme-dark: mat.define-theme((color: (theme-type: dark,
   @include mat.all-component-colors($theme-dark);
 }
 
-.my-custom-list-item {
-  color: brown;
-  background-color: aqua;
-}
-
-.my-custom-list-item:hover {
-  background-color:rgb(213 186 255);
-  color: black;
-}

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
 import { NgGdService, Point, LineObject, Candlestick } from "ng-gd";
 @Component({
   selector: 'app-ng-gd',
@@ -8,13 +8,22 @@ import { NgGdService, Point, LineObject, Candlestick } from "ng-gd";
   templateUrl: './ng-gd.component.html',
   styleUrl: './ng-gd.component.scss'
 })
-export class NgGdComponent implements OnInit,AfterViewInit {
+export class NgGdComponent implements OnInit, AfterViewInit {
   gd = inject(NgGdService);
   @ViewChild('canvas') canvas!: ElementRef;
   private ctx!: CanvasRenderingContext2D;
   move = false;
+  drag = false;
+  dragStartPosition: Point = { x: 0, y: 0 };
+  constructor(private elementRef: ElementRef) {
+
+  }
+
   ngAfterViewInit(): void {
-    this.ctx = this.canvas.nativeElement.getContext('2d')!;
+    
+  }
+  ngOnInit(): void {
+    this.ctx = this.elementRef.nativeElement.querySelector('canvas')?.getContext('2d')!;
     this.gd.start(800, 600);
     this.gd.setDarkMode();
     const candleStick: Candlestick[] = [
@@ -85,7 +94,7 @@ export class NgGdComponent implements OnInit,AfterViewInit {
       { x: 25, y: 400 },
       400,
       4,
-      ['0', '100', '200', '300','400'],
+      ['0', '100', '200', '300', '400'],
       12,
       0,
       10,
@@ -93,10 +102,10 @@ export class NgGdComponent implements OnInit,AfterViewInit {
     );
     this.gd.clear(this.ctx);
     this.gd.draw(this.ctx);
+
   }
-  ngOnInit(): void {
-    
-  }
+
+
 
   @HostListener('mousewheel', ['$event'])
   zoomWheel(event: WheelEvent) {
@@ -110,11 +119,12 @@ export class NgGdComponent implements OnInit,AfterViewInit {
 
   @HostListener('mouseup', ['$event'])
   async onMouseUp(event: MouseEvent) {
-    if (this.move === true) {
+    if (this.move === true || this.drag === true) {
       this.gd.resetMouse();
       this.gd.clear(this.ctx);
       this.gd.draw(this.ctx);
       this.move = false;
+      this.drag = false;
     }
   }
 
@@ -122,11 +132,18 @@ export class NgGdComponent implements OnInit,AfterViewInit {
   async onMouseDown(event: MouseEvent) {
     if (this.gd.click(this.ctx, event).length > 0) {
       this.move = true;
+    } else {
+      this.drag = true;
+      this.dragStartPosition = this.gd.getMousePoint(
+        this.ctx,
+        event.offsetX,
+        event.offsetY
+      );
     }
   }
 
   @HostListener('mousemove', ['$event'])
-  async onMouseMove(event: MouseEvent) {
+  onMouseMove(event: MouseEvent) {
     if (this.move === true) {
       this.gd.getClicks().forEach((element) => {
         if (!(element.shape instanceof LineObject)) {
@@ -151,6 +168,19 @@ export class NgGdComponent implements OnInit,AfterViewInit {
           }
         }
       });
+    }
+    if (this.drag === true) {
+      const currentTransformedCursor = this.gd.getMousePoint(
+        this.ctx,
+        event.offsetX,
+        event.offsetY
+      );
+      this.ctx.translate(
+        currentTransformedCursor.x - this.dragStartPosition.x,
+        currentTransformedCursor.y - this.dragStartPosition.y
+      );
+      this.gd.clear(this.ctx);
+      this.gd.draw(this.ctx);
     }
   }
 }

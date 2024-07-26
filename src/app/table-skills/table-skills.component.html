@@ -1,5 +1,5 @@
 <div class="mat-elevation-z2">
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
+  <table mat-table class="full-width-table" matSort aria-label="Skills">
     <!-- Id Column -->
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef>Logo</th>
@@ -24,7 +24,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator #paginator style="background-color: #8a98eb;" [length]="dataSource.data.length" [pageIndex]="0"
+  <mat-paginator #paginator class="paginator" [length]="dataSource.data.length" [pageIndex]="0"
     [pageSize]="10" aria-label="Select page">
   </mat-paginator>
 </div>

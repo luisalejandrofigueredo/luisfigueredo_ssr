@@ -1,93 +1,100 @@
-body{
-  background-color: #8a98eb; /* Example using a blue color */
+$back-color:#8a98eb;
+
+body {
+  background-color: $back-color
+  /* Example using a blue color */
 }
+
 mat-toolbar {
-  background-color: #8a98eb; /* Example using a blue color */
+  background-color:$back-color;
+  /* Example using a blue color */
 }
 
 .sidenav-container {
   height: 100%;
-  background-color: #8a98eb;
+  background-color: $back-color;
 }
-mat-nav-list{
-  background-color: #8a98eb;
+
+mat-nav-list {
+  background-color:$back-color;
 
 }
+
 .sidenav {
   width: 200px;
-  background-color: #8a98eb;;
+  background-color: $back-color;
+  ;
 }
 
 sidenav.mat-toolbar {
-  background: #8a98eb;
+  background: $back-color;
 }
 
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: #8a98eb;
+  background-color: $back-color;
 }
 
 
 
 
-.container 
-{
+.container {
   display: grid // Use flexbox for easy centering
 }
-.child
-{
+
+.child {
   display: flex;
   flex-direction: column
 }
-.logo 
-{
-    border-radius: 50%;
-    margin-right: 25px;
-    width: 40px
-}
-.column
-{
-    margin: auto;
-    display: flex;
-    flex-direction: row
+
+.logo {
+  border-radius: 50%;
+  margin-right: 25px;
+  width: 40px
 }
 
-.card{
-    width: 300px;
-    align-content: space-around;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    box-shadow: 4px 4px 6px rgb(100 100 100);
+.column {
+  margin: auto;
+  display: flex;
+  flex-direction: row
+}
+
+.card {
+  width: 300px;
+  align-content: space-around;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  box-shadow: 4px 4px 6px rgb(100 100 100);
 }
 
 .flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .rowTitulo {
-    display: flex;
-    flex-direction: row;
-    align-items: start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.rowContacts{
-    display: flex;
-    flex-direction: row;
-    align-content: stretch;
+.rowTitulo {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+
+.rowContacts {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
 }
 
 .rowPhone {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    line-height: 1px;
-    border: aliceblue;
-    border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1px;
+  border: aliceblue;
+  border-style: solid;
 }
 
 .example-action-buttons {
@@ -99,7 +106,7 @@ sidenav.mat-toolbar {
   align-items: center;
 }
 
-.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+.example-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
   margin-left: 8px;
   background-color: black;
   color: aliceblue;
@@ -110,4 +117,13 @@ sidenav.mat-toolbar {
   justify-content: flex-end;
   margin-left: auto;
   margin-right: 0;
+}
+
+.slide.toggle {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.slide-span {
+  padding-top: 5px;
 }
