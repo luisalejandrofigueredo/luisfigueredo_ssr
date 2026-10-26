@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { link } from 'fs';
 
 // TODO: Replace this with your own data model type
 export interface TableSkillsItem {
@@ -18,13 +17,13 @@ const EXAMPLE_DATA: TableSkillsItem[] = [
   { image: "Angular.svg", width: "200", name: 'Angular', link: "https://angular.io/" },
   { image: "nodejs.svg", width: "200", name: 'Node', link: "https://nodejs.org/en" },
   { image: "docker.png", width: "75", name: "Docker", link: "https://www.docker.com/" },
-  { image: "express.png", width: "100", name: "Express", link: "https://expressjs.com/" },
-  { image: "typescript-logo-1024x576.png", width: "100", name: 'Typescript', link: "https://www.typescriptlang.org/" },
-  { image: "typeorm.png", width: "200", name: 'Typeorm', link: "https://typeorm.io/" },
+  { image: "express.webp", width: "100", name: "Express", link: "https://expressjs.com/" },
+  { image: "typescript-logo.webp", width: "100", name: 'Typescript', link: "https://www.typescriptlang.org/" },
+  { image: "typeorm.webp", width: "200", name: 'Typeorm', link: "https://typeorm.io/" },
   { image: "mysql_official_logo_icon.svg", width: "150", name: "Mysql", link: "https://www.mysql.com/" },
   { image: "postgresql_src_logo_icon_170834.svg", width: "100", name: 'Postgress', link: "https://www.postgresql.org/" },
   { image: "github-icon-seeklogo.com.svg", width: "100", name: 'Github', link: "https://github.com/" },
-  { image: "handlebars_logo.png", width: "100", name: 'Handlebars', link: "https://handlebarsjs.com/" },
+  { image: "handlebars_logo.webp", width: "100", name: 'Handlebars', link: "https://handlebarsjs.com/" },
 
 ];
 

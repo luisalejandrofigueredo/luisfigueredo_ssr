@@ -25,13 +25,15 @@ $theme-dark: mat.define-theme((color: (theme-type: dark,
   );
 
 .light-theme {
-  @include mat.core-theme($theme-light);
+  @include mat.elevation-classes();
+  @include mat.app-background();
   @include mat.all-component-colors($theme-light);
 }
 
 
 .dark-theme {
-  @include mat.core-theme($theme-dark);
+  @include mat.elevation-classes();
+  @include mat.app-background();
   @include mat.all-component-colors($theme-dark);
 }
 

@@ -1,7 +1,8 @@
-import { Component, HostBinding, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, Inject, OnDestroy, OnInit, DOCUMENT, PLATFORM_ID, ChangeDetectionStrategy } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { NavigationComponent } from "./navigation/navigation.component";
 import { DarkModeService } from "./services/dark-mode.service";
-import { DOCUMENT } from '@angular/common';
+
 
 import { FullscreenOverlayContainer, OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 import { MatIconRegistry } from '@angular/material/icon';
@@ -16,22 +17,25 @@ const LIN=
 `;
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [NavigationComponent, OverlayModule],
-  providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    selector: 'app-root',
+    imports: [NavigationComponent, OverlayModule],
+    providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }],
+    templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'luisfigueredo_ssr';
   light_class = 'light-theme';
   dark_class = 'dark-theme';
   @HostBinding('class') className = 'light-theme';
-  constructor(@Inject(DOCUMENT) private document: Document,private darkModeService: DarkModeService, private overlay: OverlayContainer,private iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) { 
+  constructor(@Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID) private platformId: object, private darkModeService: DarkModeService, private overlay: OverlayContainer,private iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) {
     iconRegistry.addSvgIconLiteral('lin', sanitizer.bypassSecurityTrustHtml(LIN));
   }
   ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.darkModeService.miEventoSubject.subscribe((changeTo) => {
       this.className = changeTo ? this.dark_class : this.light_class;
       if (changeTo === true) {

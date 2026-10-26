@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject, OnInit, Optional } from '@angular/core';
+import { Component, HostBinding, inject, OnInit, Optional, ChangeDetectionStrategy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,39 +17,40 @@ import { DarkModeService } from '../services/dark-mode.service';
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.scss',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    RouterLink,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    ReactiveFormsModule,
-    OverlayModule,
-    AsyncPipe,
-  ],
-  animations: [
-    trigger('routerTransition', [
-      transition('* <=> *', [    
-        query(':enter, :leave',style({ position: 'fixed', width:'100%' }),{optional: true}),
-        group([ 
-          query(':enter',[
-            style({ transform: 'translateX(100%)' }),
-            animate('0.5s ease-in-out', style({ transform: 'translateX(0%)' }))
-          ],{optional: true}),
-          query(':leave', [
-            style({ transform: 'translateX(0%)' }),
-            animate('0.5s ease-in-out', style({ transform: 'translateX(100%)' }))],{optional: true}),
+    selector: 'app-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrl: './navigation.component.scss',
+    imports: [
+        RouterOutlet,
+        RouterLink,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        ReactiveFormsModule,
+        OverlayModule,
+        AsyncPipe,
+    ],
+    changeDetection: ChangeDetectionStrategy.Eager,
+    animations: [
+        trigger('routerTransition', [
+            transition('* <=> *', [
+                query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
+                group([
+                    query(':enter', [
+                        style({ transform: 'translateX(100%)' }),
+                        animate('0.5s ease-in-out', style({ transform: 'translateX(0%)' }))
+                    ], { optional: true }),
+                    query(':leave', [
+                        style({ transform: 'translateX(0%)' }),
+                        animate('0.5s ease-in-out', style({ transform: 'translateX(100%)' }))
+                    ], { optional: true }),
+                ])
+            ])
         ])
-      ])
-    ])
-   ]
+    ]
 })
 export class NavigationComponent implements OnInit {
   private breakpointObserver = inject(BreakpointObserver);

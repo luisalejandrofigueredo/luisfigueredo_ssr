@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PLATFORM_ID } from '@angular/core';
 
 import { NgGdComponent } from './ng-gd.component';
 
@@ -8,9 +9,9 @@ describe('NgGdComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NgGdComponent]
-    })
-    .compileComponents();
+      imports: [NgGdComponent],
+      providers: [{ provide: PLATFORM_ID, useValue: 'server' }],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NgGdComponent);
     component = fixture.componentInstance;

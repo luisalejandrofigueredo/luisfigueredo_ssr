@@ -1,17 +1,35 @@
 import { Routes } from '@angular/router';
-import { HomepageComponent } from "./homepage/homepage.component";
-import { SkillsComponent } from "./skills/skills.component";
-import { DegreesComponent } from "./degrees/degrees.component";
-import { ExperienceComponent } from "./experience/experience.component";
-import { AboutComponent } from './about/about.component';
-import { NgGdComponent } from './ng-gd/ng-gd.component';
-import { TableSkillsComponent } from "./table-skills/table-skills.component";
+
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { component: HomepageComponent, path: 'home', data: { state: 'home' } },
-    { component: TableSkillsComponent, path: 'skills', data: { state: 'skills' } },
-    { component: DegreesComponent, path: 'degrees', data: { state: 'degrees' } },
-    { component: ExperienceComponent, path: 'experience', data: { state: 'experience' } },
-    { component: NgGdComponent, path: 'ng-gd', data: { state: 'ng-gd' } },
-    { component: AboutComponent, path: 'about', data: { state: 'about' } }
+    {
+        path: 'home',
+        loadComponent: () => import('./homepage/homepage.component').then(m => m.HomepageComponent),
+        data: { state: 'home' }
+    },
+    {
+        path: 'skills',
+        loadComponent: () => import('./table-skills/table-skills.component').then(m => m.TableSkillsComponent),
+        data: { state: 'skills', preload: true }
+    },
+    {
+        path: 'degrees',
+        loadComponent: () => import('./degrees/degrees.component').then(m => m.DegreesComponent),
+        data: { state: 'degrees' }
+    },
+    {
+        path: 'experience',
+        loadComponent: () => import('./experience/experience.component').then(m => m.ExperienceComponent),
+        data: { state: 'experience' }
+    },
+    {
+        path: 'ng-gd',
+        loadComponent: () => import('./ng-gd/ng-gd.component').then(m => m.NgGdComponent),
+        data: { state: 'ng-gd' }
+    },
+    {
+        path: 'about',
+        loadComponent: () => import('./about/about.component').then(m => m.AboutComponent),
+        data: { state: 'about' }
+    }
 ];

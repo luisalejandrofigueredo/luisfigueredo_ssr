@@ -1,15 +1,17 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, inject, PLATFORM_ID, ChangeDetectionStrategy } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { NgGdService, Point, LineObject, Candlestick } from "ng-gd";
 @Component({
-  selector: 'app-ng-gd',
-  standalone: true,
-  imports: [],
-  providers: [NgGdService],
-  templateUrl: './ng-gd.component.html',
-  styleUrl: './ng-gd.component.scss'
+    selector: 'app-ng-gd',
+    imports: [],
+    providers: [NgGdService],
+    templateUrl: './ng-gd.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    styleUrl: './ng-gd.component.scss'
 })
-export class NgGdComponent implements OnInit, AfterViewInit {
+export class NgGdComponent implements OnInit {
   gd = inject(NgGdService);
+  private platformId = inject(PLATFORM_ID);
   @ViewChild('canvas') canvas!: ElementRef;
   private ctx!: CanvasRenderingContext2D;
   move = false;
@@ -19,10 +21,10 @@ export class NgGdComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit(): void {
-    
-  }
   ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.ctx = this.elementRef.nativeElement.querySelector('canvas')?.getContext('2d')!;
     this.gd.start(800, 600);
     this.gd.setDarkMode();
@@ -108,10 +110,11 @@ export class NgGdComponent implements OnInit, AfterViewInit {
 
 
   @HostListener('mousewheel', ['$event'])
-  zoomWheel(event: WheelEvent) {
-    event.preventDefault();
-    const mouse = this.gd.getMousePoint(this.ctx, event.offsetX, event.offsetY);
-    const zoom = event.deltaY < 0 ? 1.1 : 0.9;
+  zoomWheel(event: Event) {
+    const wheelEvent = event as WheelEvent;
+    wheelEvent.preventDefault();
+    const mouse = this.gd.getMousePoint(this.ctx, wheelEvent.offsetX, wheelEvent.offsetY);
+    const zoom = wheelEvent.deltaY < 0 ? 1.1 : 0.9;
     this.gd.zoomInPoint(this.ctx, mouse.x, mouse.y, zoom);
     this.gd.clear(this.ctx);
     this.gd.draw(this.ctx);
